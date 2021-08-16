@@ -1,0 +1,24 @@
+.calculator {
+  display: grid;
+  flex-direction: column;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  width: 400px;
+  height: 350px;
+  border: black solid 2px;
+}
+.calculator__display {
+  text-align: right;
+}
+.calculator__keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.key-equals {
+  grid-row-start: 2;
+  grid-row-end: 6;
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
