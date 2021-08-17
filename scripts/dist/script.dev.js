@@ -9,6 +9,7 @@ KEYS.addEventListener("click", function (e) {
     var action = key.dataset.action;
     var keyContent = key.textContent;
     var currentDisplay = DISPLAY.textContent;
+    var previousKeyType = CALCULATOR.dataset.previousKeyType;
 
     if (!action) {
       if (currentDisplay === "0" || previousKeyType === "operator") {
@@ -26,7 +27,13 @@ KEYS.addEventListener("click", function (e) {
     }
 
     if (action === "clear") {
-      console.log("Clear key");
+      DISPLAY.textContent = "0";
+      CALCULATOR.dataset.firstNum = " ";
+      CALCULATOR.dataset.operator = " ";
+      CALCULATOR.dataset.previousKeyType = " ";
+      Array.from(key.parentNode.children).forEach(function (k) {
+        return k.classList.remove('is-pressed');
+      });
     }
 
     if (action === "decimal") {
@@ -39,10 +46,13 @@ KEYS.addEventListener("click", function (e) {
     if (action === "solve") {
       var firstNum = CALCULATOR.dataset.firstNum;
       var secondNum = currentDisplay;
-      var operator = CALCULATOR.dataset.operator; //console.log("equals key")
-
+      var operator = CALCULATOR.dataset.operator;
       DISPLAY.textContent = solve(firstNum, operator, secondNum);
     }
+
+    Array.from(key.parentNode.children).forEach(function (k) {
+      return k.classList.remove('is-pressed');
+    });
   }
 });
 
