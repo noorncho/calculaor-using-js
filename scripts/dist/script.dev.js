@@ -37,7 +37,33 @@ KEYS.addEventListener("click", function (e) {
     }
 
     if (action === "solve") {
-      console.log("equals key");
+      var firstNum = CALCULATOR.dataset.firstNum;
+      var secondNum = currentDisplay;
+      var operator = CALCULATOR.dataset.operator; //console.log("equals key")
+
+      DISPLAY.textContent = solve(firstNum, operator, secondNum);
     }
   }
 });
+
+var solve = function solve(num1, operator, num2) {
+  var result = " ";
+
+  if (operator === "add") {
+    result = parseFloat(num1) + parseFloat(num2);
+  }
+
+  if (operator === "subtract") {
+    result = parseFloat(num1) - parseFloat(num2);
+  }
+
+  if (operator === "multiply") {
+    result = parseFloat(num1) * parseFloat(num2);
+  }
+
+  if (operator === "divide") {
+    result = parseFloat(num1) / parseFloat(num2);
+  }
+
+  return result;
+};
