@@ -11,7 +11,7 @@ KEYS.addEventListener("click", e =>{
         const currentDisplay = DISPLAY.textContent;
         
         if(!action){
-            if(currentDisplay === "0"){
+            if(currentDisplay === "0" || previousKeyType === "operator"){
                 DISPLAY.textContent = keyContent;
             }else{
                 DISPLAY.textContent = currentDisplay + keyContent;
@@ -19,7 +19,10 @@ KEYS.addEventListener("click", e =>{
         }
 
         if(action === "add" || action === "subtract" || action === "divide" || action === "multiply"){
-            console.log("operator key");
+            key.classList.add("is-pressed");
+            CALCULATOR.dataset.firstNum = currentDisplay;
+            CALCULATOR.dataset.operator = action;
+            CALCULATOR.dataset.previousKeyType = "operator";
         }
 
         if(action === "clear"){

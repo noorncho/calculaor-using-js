@@ -49,6 +49,10 @@ button {
   color: #3cad3c;
 }
 
+.is-pressed {
+  background-color: #c9b8b8;
+}
+
 * {
   margin: 0;
   padding: 0;
