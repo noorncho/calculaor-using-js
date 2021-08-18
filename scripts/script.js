@@ -28,15 +28,17 @@ KEYS.addEventListener("click", e =>{
 
         if(action === "clear"){
             DISPLAY.textContent = "0";
-            CALCULATOR.dataset.firstNum = " ";
-            CALCULATOR.dataset.operator = " ";
-            CALCULATOR.dataset.previousKeyType = " ";
+            delete CALCULATOR.dataset.firstNum;
+            delete CALCULATOR.dataset.operator;
+            delete CALCULATOR.dataset.previousKeyType;
             Array.from(key.parentNode.children).forEach(k => k.classList.remove('is-pressed'));
         }
 
         if(action === "decimal"){
             if(!currentDisplay.includes(".")){ //Check so that only one deciaml point
                 DISPLAY.textContent = currentDisplay + ".";
+            }else if(previousKeyType === "operator"){
+                DISPLAY.textContent = "0.";
             }
         }
 
