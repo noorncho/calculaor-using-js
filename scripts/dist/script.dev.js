@@ -64,7 +64,22 @@ KEYS.addEventListener("click", function (e) {
       var _firstNum = CALCULATOR.dataset.firstNum;
       var _secondNum = currentDisplay;
       var _operator = CALCULATOR.dataset.operator;
-      DISPLAY.textContent = solve(_firstNum, _operator, _secondNum);
+
+      if (_firstNum
+      /*&& previousKeyType === "number"*/
+      ) {
+          //previousKeyType === "operator"){
+          if (previousKeyType === "solve") {
+            _firstNum = currentDisplay;
+            _secondNum = CALCULATOR.dataset.modValue;
+          }
+
+          DISPLAY.textContent = solve(_firstNum, _operator, _secondNum);
+        } else {
+        alert("Invalid Format");
+      }
+
+      CALCULATOR.dataset.modValue = _secondNum;
       CALCULATOR.dataset.previousKeyType = "solve";
     }
 

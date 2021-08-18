@@ -59,11 +59,20 @@ KEYS.addEventListener("click", e =>{
         }
 
         if(action === "solve"){
-            const firstNum = CALCULATOR.dataset.firstNum;
-            const secondNum = currentDisplay;
+            let firstNum = CALCULATOR.dataset.firstNum;
+            let secondNum = currentDisplay;
             const operator = CALCULATOR.dataset.operator;
-            DISPLAY.textContent = solve(firstNum, operator, secondNum);
+            if(firstNum /*&& previousKeyType === "number"*/){//previousKeyType === "operator"){
+                if(previousKeyType === "solve"){
+                    firstNum = currentDisplay;
+                    secondNum = CALCULATOR.dataset.modValue;
+                }
 
+                DISPLAY.textContent = solve(firstNum, operator, secondNum);
+            }else{
+                alert("Invalid Format");
+            }
+            CALCULATOR.dataset.modValue = secondNum;
             CALCULATOR.dataset.previousKeyType = "solve";
         }
         Array.from(key.parentNode.children).forEach(k => k.classList.remove('is-pressed'));
