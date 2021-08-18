@@ -17,12 +17,26 @@ KEYS.addEventListener("click", e =>{
             }else{
                 DISPLAY.textContent = currentDisplay + keyContent;
             }
+
+            CALCULATOR.dataset.previousKeyType = "number";
         }
 
         if(action === "add" || action === "subtract" || action === "divide" || action === "multiply"){
+            const firstNum = CALCULATOR.dataset.firstNum;
+            const secondNum = currentDisplay;
+            const operator = CALCULATOR.dataset.operator;
+
+            //Check for first number, a previous operator and a second number
+            if(firstNum && operator && previousKeyType !== "operator"){
+                const solvedNum = solve(firstNum, operator, secondNum);
+                DISPLAY.textContent = solvedNum;
+                CALCULATOR.dataset.firstNum = solvedNum;
+            }else{
+                CALCULATOR.dataset.firstNum = currentDisplay;
+            }
+
             key.classList.add("is-pressed");
-            CALCULATOR.dataset.firstNum = currentDisplay;
-            CALCULATOR.dataset.operator = action;
+            CALCULATOR.dataset.operator = action;            
             CALCULATOR.dataset.previousKeyType = "operator";
         }
 
@@ -40,6 +54,8 @@ KEYS.addEventListener("click", e =>{
             }else if(previousKeyType === "operator"){
                 DISPLAY.textContent = "0.";
             }
+
+            CALCULATOR.dataset.previousKeyType = "decimal";
         }
 
         if(action === "solve"){
@@ -47,6 +63,8 @@ KEYS.addEventListener("click", e =>{
             const secondNum = currentDisplay;
             const operator = CALCULATOR.dataset.operator;
             DISPLAY.textContent = solve(firstNum, operator, secondNum);
+
+            CALCULATOR.dataset.previousKeyType = "solve";
         }
         Array.from(key.parentNode.children).forEach(k => k.classList.remove('is-pressed'));
     }
