@@ -1,87 +1,99 @@
-const CALCULATOR = document.getElementById("calculator");
-const KEYS = CALCULATOR.querySelector(".calculator__keys");
-const DISPLAY = document.getElementById("calculator__display");
+//Get all buttons from HTML
+const numberKeys = document.querySelectorAll(".key-number");
+const operatorKeys = document.querySelectorAll(".key-operator");
+const equalKey = document.querySelector(".key-equals");
+const clearKey = document.querySelector(".key-clear");
+const decimalKey = document.querySelector(".key-decimal");
 
-KEYS.addEventListener("click", e =>{
+const CALCULATOR = document.querySelector(".calculator");
+const DISPLAY = document.querySelector(".calculator__display");
 
-    if(e.target.matches("button")){
-        const key = e.target;
-        const action = key.dataset.action;
-        const keyContent = key.textContent;
+numberKeys.forEach(button =>{
+    button.addEventListener("click", e => {
+        const keyContent = e.target.textContent;
         const currentDisplay = DISPLAY.textContent;
         const previousKeyType = CALCULATOR.dataset.previousKeyType;
-        
-        if(!action){
-            if(currentDisplay === "0" || previousKeyType === "operator"){
-                DISPLAY.textContent = keyContent;
-            }else{
-                DISPLAY.textContent = currentDisplay + keyContent;
-            }
 
-            CALCULATOR.dataset.previousKeyType = "number";
+        if(currentDisplay === "0" || previousKeyType === "operator"){
+            DISPLAY.textContent = keyContent;
+        }else{
+            DISPLAY.textContent = currentDisplay + keyContent;
         }
 
-        if(action === "add" || action === "subtract" || action === "divide" || action === "multiply"){
-            const firstNum = CALCULATOR.dataset.firstNum;
-            const secondNum = currentDisplay;
-            const operator = CALCULATOR.dataset.operator;
+        CALCULATOR.dataset.previousKeyType = "number";
+    });
+})
 
-            //Check for first number, a previous operator and a second number
-            if(firstNum && operator && previousKeyType !== "operator"){
-                const solvedNum = solve(firstNum, operator, secondNum);
-                DISPLAY.textContent = solvedNum;
-                CALCULATOR.dataset.firstNum = solvedNum;
-            }else{
-                CALCULATOR.dataset.firstNum = currentDisplay;
-            }
+operatorKeys.forEach(button =>{
+    button.addEventListener("click", e => {
+        const previousKeyType = CALCULATOR.dataset.previousKeyType;
+        const currentDisplay = DISPLAY.textContent;
+        const action = e.target.dataset.action;
 
-            key.classList.add("is-pressed");
-            CALCULATOR.dataset.operator = action;            
-            CALCULATOR.dataset.previousKeyType = "operator";
+        const firstNum = CALCULATOR.dataset.firstNum;
+        const secondNum = currentDisplay;
+        const operator = CALCULATOR.dataset.operator;
+
+        //Check for first number, a previous operator and a second number
+        if(firstNum && operator && previousKeyType !== "operator"){
+            const solvedNum = solve(firstNum, operator, secondNum);
+            DISPLAY.textContent = solvedNum;
+            CALCULATOR.dataset.firstNum = solvedNum;
+        }else{
+            CALCULATOR.dataset.firstNum = currentDisplay;
         }
 
-        if(action === "clear"){
-            DISPLAY.textContent = "0";
-            delete CALCULATOR.dataset.firstNum;
-            delete CALCULATOR.dataset.operator;
-            delete CALCULATOR.dataset.previousKeyType;
-            Array.from(key.parentNode.children).forEach(k => k.classList.remove('is-pressed'));
-        }
+        e.target.classList.add("is-pressed");
+        CALCULATOR.dataset.operator = action;            
+        CALCULATOR.dataset.previousKeyType = "operator";
+    });
+})
 
-        if(action === "decimal"){
-            if(!currentDisplay.includes(".")){ //Check so that only one deciaml point
-                DISPLAY.textContent = currentDisplay + ".";
-            }else if(previousKeyType === "operator"){
-                DISPLAY.textContent = "0.";
-            }
+decimalKey.addEventListener("click", () => {
+    const currentDisplay = DISPLAY.textContent;
+    const previousKeyType = CALCULATOR.dataset.previousKeyType;
 
-            CALCULATOR.dataset.previousKeyType = "decimal";
-        }
-
-        if(action === "solve"){
-            let firstNum = CALCULATOR.dataset.firstNum;
-            let secondNum = currentDisplay;
-            const operator = CALCULATOR.dataset.operator;
-            if(firstNum /*&& previousKeyType === "number"*/){//previousKeyType === "operator"){
-                if(previousKeyType === "solve"){
-                    firstNum = currentDisplay;
-                    secondNum = CALCULATOR.dataset.modValue;
-                }
-
-                DISPLAY.textContent = solve(firstNum, operator, secondNum);
-            }else{
-                alert("Invalid Format");
-            }
-            CALCULATOR.dataset.modValue = secondNum;
-            CALCULATOR.dataset.previousKeyType = "solve";
-        }
-        Array.from(key.parentNode.children).forEach(k => k.classList.remove('is-pressed'));
+    if(!currentDisplay.includes(".")){ //Check so that only one deciaml point
+        DISPLAY.textContent = currentDisplay + ".";
+    }else if(previousKeyType === "operator"){
+        DISPLAY.textContent = "0.";
     }
-});
+
+    CALCULATOR.dataset.previousKeyType = "decimal";
+})
+
+clearKey.addEventListener("click", () => {
+    DISPLAY.textContent = "0";
+    delete CALCULATOR.dataset.firstNum;
+    delete CALCULATOR.dataset.operator;
+    delete CALCULATOR.dataset.previousKeyType;
+    operatorKeys.forEach(button => button.classList.remove("is-pressed"));
+})
+
+equalKey.addEventListener("click", () => {
+    const currentDisplay = DISPLAY.textContent;
+    const previousKeyType = CALCULATOR.dataset.previousKeyType;
+
+    let firstNum = CALCULATOR.dataset.firstNum;
+    let secondNum = currentDisplay;
+    const operator = CALCULATOR.dataset.operator;
+    if(firstNum /*&& previousKeyType === "number"*/){//previousKeyType === "operator"){
+        if(previousKeyType === "solve"){
+            firstNum = currentDisplay;
+            secondNum = CALCULATOR.dataset.modValue;
+        }
+
+        DISPLAY.textContent = solve(firstNum, operator, secondNum);
+    }else{
+        alert("Invalid Format");
+    }
+    CALCULATOR.dataset.modValue = secondNum;
+    CALCULATOR.dataset.previousKeyType = "solve";
+})
 
 const solve = (num1, operator, num2) =>{
-    let result = " ";
-
+    let result;
+    
     if(operator === "add"){
         result = parseFloat(num1) + parseFloat(num2);
     }
