@@ -1,6 +1,6 @@
 button{
-    font-size: 20px;
-    border-radius: 25px;
+    font-size: 2em;
+    border-radius: 50px;
 }
 
 .key-primary{
@@ -14,9 +14,15 @@ button{
 }
 
 .key-operator{    
-    color: rgb(60, 173, 60);
+    color: rgb(42, 187, 42);
 }
 
 .is-pressed{
     background-color: rgb(201, 184, 184);
+}
+
+@media screen and (min-width: 768px){
+    button{
+        font-size: 4.5em;
+    }    
 }
