@@ -106,9 +106,9 @@ equalKey.addEventListener("click", () => {
         }
 
         DISPLAY.textContent = solve(firstNum, operator, secondNum);
-    }/*else{
+    }else{
         alert("Invalid Format");
-    }*/
+    }
     DISPLAY.textContent = solve(firstNum, operator, secondNum);
     CALCULATOR.dataset.tempValue = secondNum;
     CALCULATOR.dataset.previousKeyType = "solve";

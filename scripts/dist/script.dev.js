@@ -104,11 +104,9 @@ equalKey.addEventListener("click", function () {
       }
 
       DISPLAY.textContent = solve(firstNum, operator, secondNum);
-    }
-  /*else{
-     alert("Invalid Format");
-  }*/
-
+    } else {
+    alert("Invalid Format");
+  }
 
   DISPLAY.textContent = solve(firstNum, operator, secondNum);
   CALCULATOR.dataset.tempValue = secondNum;
