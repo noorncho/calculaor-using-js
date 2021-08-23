@@ -5,8 +5,8 @@
     grid-template-rows: 1fr 2fr;
     grid-template-columns: 1fr;
     gap: 5px;
-        
-    height: 100vh;
+    margin: 2px;
+    height: 99vh;
     border: black solid 2px;    
     
     &__display{
@@ -14,9 +14,8 @@
         align-items: flex-end;
         justify-content: flex-end;
         font-size: 5em;
-
-        background-color: black;
-        color: white;
+        border-bottom: black solid 1px;
+        background-color: white;
     }
     
     &__keys{
@@ -35,9 +34,9 @@
 }
 
 @media screen and (min-width: 768px){
-    .calculator{    
-        height: auto;
-        width: auto;
+    .calculator{ 
+        //width: 100%;
+        padding: 7vh;
         
         &__display{
             font-size: 10em;

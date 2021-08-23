@@ -1,12 +1,15 @@
 button{
     font-size: 2em;
     border-radius: 50px;
+    border: rgb(173, 166, 166) solid 1px;
 }
 
 .key-primary{
     background: rgb(60, 173, 60);
     color: white;
     border-radius: 12px;
+    border: rgb(60, 173, 60) solid 1px;
+    font-size: 3em;
 }
 
 .key-clear{
@@ -15,6 +18,8 @@ button{
 
 .key-operator{    
     color: rgb(42, 187, 42);
+    font-size: 2.5em;
+    
 }
 
 .is-pressed{

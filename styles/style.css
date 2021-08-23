@@ -5,7 +5,8 @@
   grid-template-rows: 1fr 2fr;
   grid-template-columns: 1fr;
   gap: 5px;
-  height: 100vh;
+  margin: 2px;
+  height: 99vh;
   border: black solid 2px;
 }
 .calculator__display {
@@ -13,8 +14,8 @@
   align-items: flex-end;
   justify-content: flex-end;
   font-size: 5em;
-  background-color: black;
-  color: white;
+  border-bottom: black solid 1px;
+  background-color: white;
 }
 .calculator__keys {
   display: grid;
@@ -32,8 +33,7 @@
 
 @media screen and (min-width: 768px) {
   .calculator {
-    height: auto;
-    width: auto;
+    padding: 7vh;
   }
   .calculator__display {
     font-size: 10em;
@@ -45,12 +45,15 @@
 button {
   font-size: 2em;
   border-radius: 50px;
+  border: #ada6a6 solid 1px;
 }
 
 .key-primary {
   background: #3cad3c;
   color: white;
   border-radius: 12px;
+  border: #3cad3c solid 1px;
+  font-size: 3em;
 }
 
 .key-clear {
@@ -59,6 +62,7 @@ button {
 
 .key-operator {
   color: #2abb2a;
+  font-size: 2.5em;
 }
 
 .is-pressed {
