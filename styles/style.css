@@ -7,7 +7,7 @@
   gap: 5px;
   margin: 2px;
   height: 99vh;
-  border: black solid 2px;
+  background-color: #646464;
 }
 .calculator__display {
   display: flex;
@@ -33,10 +33,15 @@
 
 @media screen and (min-width: 768px) {
   .calculator {
-    padding: 7vh;
+    width: 40%;
+    height: 50%;
+    padding: 15px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .calculator__display {
-    font-size: 10em;
+    font-size: 5em;
   }
   .calculator__keys {
     gap: 10px;
@@ -71,11 +76,17 @@ button {
 
 @media screen and (min-width: 768px) {
   button {
-    font-size: 4.5em;
+    font-size: 2.5em;
   }
 }
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  background: #020024;
+  background: linear-gradient(135deg, #020024 0%, #1d223e 25%, #b0afde 100%);
+  height: 100vh;
 }
