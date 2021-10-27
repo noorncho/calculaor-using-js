@@ -9,3 +9,4 @@ Use like any regular calculator.
 - HTML5
 - Vanilla JS
 - CSS3 / SASS
+- Cypress for Testing
